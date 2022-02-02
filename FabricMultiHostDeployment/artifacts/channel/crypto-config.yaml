@@ -5,22 +5,22 @@ OrdererOrgs:
     EnableNodeOUs: true
 
     Specs:
-      - Hostname: orderer
+      - Hostname: diggipet_orderer
         SANS:
             - "localhost"
             - "127.0.0.1"
-      - Hostname: orderer2
+      - Hostname: vet_orderer
         SANS:
           - "localhost"
           - "127.0.0.1"
-      - Hostname: orderer3
+      - Hostname: breeders_orderer
         SANS:
             - "localhost"
             - "127.0.0.1"
 
 PeerOrgs:
-  - Name: Org1
-    Domain: org1.example.com
+  - Name: Diggipet
+    Domain: diggipet.example.com
     EnableNodeOUs: true
 
     Template:
@@ -31,8 +31,8 @@ PeerOrgs:
     Users:
       Count: 1
 
-  - Name: Org2
-    Domain: org2.example.com
+  - Name: Vet_org
+    Domain: vet_org.example.com
     EnableNodeOUs: true
 
     Template:
@@ -43,8 +43,8 @@ PeerOrgs:
     Users:
       Count: 1
 
-  - Name: Org3
-    Domain: org3.example.com
+  - Name: Breeders_org
+    Domain: breeders_org.example.com
     EnableNodeOUs: true
 
     Template:

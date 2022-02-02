@@ -16,78 +16,78 @@ Organizations:
                 Type: Signature
                 Rule: "OR('OrdererMSP.admin')"
 
-    - &Org1
-        Name: Org1MSP
-        ID: Org1MSP
+    - &Diggipet
+        Name: DiggipetMSP
+        ID: DiggipetMSP
 
-        MSPDir: ../../setup1/vm1/crypto-config/peerOrganizations/org1.example.com/msp
+        MSPDir: ../../setup1/vm1/crypto-config/peerOrganizations/diggipet.example.com/msp
 
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('Org1MSP.admin', 'Org1MSP.peer', 'Org1MSP.client')"
+                Rule: "OR('DiggipetMSP.admin', 'DiggipetMSP.peer', 'DiggipetMSP.client')"
             Writers:
                 Type: Signature
-                Rule: "OR('Org1MSP.admin', 'Org1MSP.client')"
+                Rule: "OR('DiggipetMSP.admin', 'DiggipetMSP.client')"
             Admins:
                 Type: Signature
-                Rule: "OR('Org1MSP.admin')"
+                Rule: "OR('DiggipetMSP.admin')"
             Endorsement:
                 Type: Signature
-                Rule: "OR('Org1MSP.peer')"
+                Rule: "OR('DiggipetMSP.peer')"
 
         AnchorPeers:
-            - Host: peer0.org1.example.com
+            - Host: peer0.diggipet.example.com
               Port: 7051
 
-    - &Org2
-        Name: Org2MSP
+    - &Vet_org
+        Name: VetorgMSP
 
-        ID: Org2MSP
+        ID: VetorgMSP
 
-        MSPDir: ../../setup1/vm2/crypto-config/peerOrganizations/org2.example.com/msp
+        MSPDir: ../../setup1/vm2/crypto-config/peerOrganizations/vet_org.example.com/msp
 
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('Org2MSP.admin', 'Org2MSP.peer', 'Org2MSP.client')"
+                Rule: "OR('VetorgMSP.admin', 'VetorgMSP.peer', 'VetorgMSP.client')"
             Writers:
                 Type: Signature
-                Rule: "OR('Org2MSP.admin', 'Org2MSP.client')"
+                Rule: "OR('VetorgMSP.admin', 'VetorgMSP.client')"
             Admins:
                 Type: Signature
-                Rule: "OR('Org2MSP.admin')"
+                Rule: "OR('VetorgMSP.admin')"
             Endorsement:
                 Type: Signature
-                Rule: "OR('Org2MSP.peer')"
+                Rule: "OR('VetorgMSP.peer')"
 
         AnchorPeers:
-            - Host: peer0.org2.example.com
+            - Host: peer0.vet_org.example.com
               Port: 9051
 
-    - &Org3
-        Name: Org3MSP
+    - &Breeders_org
+        Name: BreedersorgMSP
 
-        ID: Org3MSP
+        ID: BreedersorgMSP
 
-        MSPDir: ../../setup1/vm3/crypto-config/peerOrganizations/org3.example.com/msp
+        MSPDir: ../../setup1/vm3/crypto-config/peerOrganizations/breeders_org.example.com/msp
 
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('Org3MSP.admin', 'Org3MSP.peer', 'Org3MSP.client')"
+                Rule: "OR('BreedersorgMSP.admin', 'BreedersorgMSP.peer', 'BreedersorgMSP.client')"
             Writers:
                 Type: Signature
-                Rule: "OR('Org3MSP.admin', 'Org3MSP.client')"
+                Rule: "OR('BreedersorgMSP.admin', 'BreedersorgMSP.client')"
             Admins:
                 Type: Signature
-                Rule: "OR('Org3MSP.admin')"
+                Rule: "OR('BreedersorgMSP.admin')"
             Endorsement:
                 Type: Signature
-                Rule: "OR('Org3MSP.peer')"
+                Rule: "OR('BreedersorgMSP.peer')"
 
         AnchorPeers:
-            - Host: peer0.org3.example.com
+            - Host: peer0.breeders_org.example.com
               Port: 11051
 
 Capabilities:
@@ -130,12 +130,12 @@ Orderer: &OrdererDefaults
 
     EtcdRaft:
         Consenters:
-        - Host: orderer.example.com
+        - Host: diggipet_orderer.example.com
           Port: 7050
-          ClientTLSCert: ../../setup1/vm4/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.crt
-          ServerTLSCert: ../../setup1/vm4/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.crt
+          ClientTLSCert: ../../setup1/vm4/crypto-config/ordererOrganizations/example.com/orderers/diggipet_orderer.example.com/tls/server.crt
+          ServerTLSCert: ../../setup1/vm4/crypto-config/ordererOrganizations/example.com/orderers/diggipet_orderer.example.com/tls/server.crt
     Addresses:
-        - orderer.example.com:7050
+        - diggipet_orderer.example.com:7050
 
     BatchTimeout: 2s
     BatchSize:
@@ -181,9 +181,9 @@ Profiles:
         Application:
             <<: *ApplicationDefaults
             Organizations:
-                - *Org1
-                - *Org2
-                - *Org3
+                - *Diggipet
+                - *Vet_org
+                - *Breeders_org
             Capabilities:
                 <<: *ApplicationCapabilities
 
@@ -196,22 +196,22 @@ Profiles:
             OrdererType: etcdraft
             EtcdRaft:
                 Consenters:
-                - Host: orderer.example.com
+                - Host: diggipet_orderer.example.com
                   Port: 7050
-                  ClientTLSCert: ../../setup1/vm4/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.crt
-                  ServerTLSCert: ../../setup1/vm4/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.crt
-                - Host: orderer2.example.com
+                  ClientTLSCert: ../../setup1/vm4/crypto-config/ordererOrganizations/example.com/orderers/diggipet_orderer.example.com/tls/server.crt
+                  ServerTLSCert: ../../setup1/vm4/crypto-config/ordererOrganizations/example.com/orderers/diggipet_orderer.example.com/tls/server.crt
+                - Host: vet_orderer.example.com
                   Port: 8050
-                  ClientTLSCert: ../../setup1/vm4/crypto-config/ordererOrganizations/example.com/orderers/orderer2.example.com/tls/server.crt
-                  ServerTLSCert: ../../setup1/vm4/crypto-config/ordererOrganizations/example.com/orderers/orderer2.example.com/tls/server.crt
-                - Host: orderer3.example.com
+                  ClientTLSCert: ../../setup1/vm4/crypto-config/ordererOrganizations/example.com/orderers/vet_orderer.example.com/tls/server.crt
+                  ServerTLSCert: ../../setup1/vm4/crypto-config/ordererOrganizations/example.com/orderers/vet_orderer.example.com/tls/server.crt
+                - Host: breeders_orderer.example.com
                   Port: 9050
-                  ClientTLSCert: ../../setup1/vm4/crypto-config/ordererOrganizations/example.com/orderers/orderer3.example.com/tls/server.crt
-                  ServerTLSCert: ../../setup1/vm4/crypto-config/ordererOrganizations/example.com/orderers/orderer3.example.com/tls/server.crt
+                  ClientTLSCert: ../../setup1/vm4/crypto-config/ordererOrganizations/example.com/orderers/breeders_orderer.example.com/tls/server.crt
+                  ServerTLSCert: ../../setup1/vm4/crypto-config/ordererOrganizations/example.com/orderers/breeders_orderer.example.com/tls/server.crt
             Addresses:
-                - orderer.example.com:7050
-                - orderer2.example.com:8050
-                - orderer3.example.com:9050
+                - diggipet_orderer.example.com:7050
+                - vet_orderer.example.com:8050
+                - breeders_orderer.example.com:9050
 
             Organizations:
             - *OrdererOrg
@@ -220,6 +220,6 @@ Profiles:
         Consortiums:
             SampleConsortium:
                 Organizations:
-                - *Org1
-                - *Org2
-                - *Org3
+                - *Diggipet
+                - *Vet_org
+                - *Breeders_org

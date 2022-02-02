@@ -2,7 +2,7 @@
 chmod -R 0755 ./crypto-config
 # Delete existing artifacts
 rm -rf ./crypto-config
-rm genesis.block mychannel.tx
+rm genesis.block channel_1.tx
 rm -rf ../../channel-artifacts/*
 
 #Generate Crypto artifactes for organizations
@@ -13,8 +13,8 @@ rm -rf ../../channel-artifacts/*
 # System channel
 SYS_CHANNEL="sys-channel"
 
-# channel name defaults to "mychannel"
-CHANNEL_NAME="mychannel"
+# channel name defaults to "channel_1"
+CHANNEL_NAME="channel_1"
 
 echo $CHANNEL_NAME
 
@@ -23,13 +23,13 @@ configtxgen -profile OrdererGenesis -configPath . -channelID $SYS_CHANNEL  -outp
 
 
 # Generate channel configuration block
-configtxgen -profile BasicChannel -configPath . -outputCreateChannelTx ./mychannel.tx -channelID $CHANNEL_NAME
+configtxgen -profile BasicChannel -configPath . -outputCreateChannelTx ./channel_1.tx -channelID $CHANNEL_NAME
 
-echo "#######    Generating anchor peer update for Org1MSP  ##########"
-configtxgen -profile BasicChannel -configPath . -outputAnchorPeersUpdate ./Org1MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org1MSP
+echo "#######    Generating anchor peer update for DiggipetMSP  ##########"
+configtxgen -profile BasicChannel -configPath . -outputAnchorPeersUpdate ./DiggipetMSPanchors.tx -channelID $CHANNEL_NAME -asOrg DiggipetMSP
 
-echo "#######    Generating anchor peer update for Org2MSP  ##########"
-configtxgen -profile BasicChannel -configPath . -outputAnchorPeersUpdate ./Org2MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org2MSP
+echo "#######    Generating anchor peer update for Vet_orgMSP  ##########"
+configtxgen -profile BasicChannel -configPath . -outputAnchorPeersUpdate ./VetorgMSPanchors.tx -channelID $CHANNEL_NAME -asOrg VetorgMSP
 
-echo "#######    Generating anchor peer update for Org3MSP  ##########"
-configtxgen -profile BasicChannel -configPath . -outputAnchorPeersUpdate ./Org3MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org3MSP
+echo "#######    Generating anchor peer update for Breeders_orgMSP  ##########"
+configtxgen -profile BasicChannel -configPath . -outputAnchorPeersUpdate ./BreedersorgMSPanchors.tx -channelID $CHANNEL_NAME -asOrg BreedersorgMSP

@@ -11,7 +11,7 @@ const transactionProposal = {
     fcn: 'move',
     args: ['a', 'b', '100'],
     chaincodeId: 'mychaincodeId',
-    channelId: 'mychannel',
+    channelId: 'firstchannel',
 };
 const { proposal, txId } = channel.generateUnsignedProposal(transactionProposal, mspId, certPem);
 

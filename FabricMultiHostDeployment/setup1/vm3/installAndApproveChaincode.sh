@@ -4,7 +4,7 @@ export PEER0_ORG3_CA=${PWD}/crypto-config/peerOrganizations/org3.example.com/pee
 export FABRIC_CFG_PATH=${PWD}/../../artifacts/channel/config/
 
 
-export CHANNEL_NAME=mychannel
+export CHANNEL_NAME=firstchannel
 
 setGlobalsForPeer0Org3() {
     export CORE_PEER_LOCALMSPID="Org3MSP"
@@ -31,7 +31,7 @@ presetup() {
 }
 # presetup
 
-CHANNEL_NAME="mychannel"
+CHANNEL_NAME="firstchannel"
 CC_RUNTIME_LANGUAGE="golang"
 VERSION="1"
 CC_SRC_PATH="./../../artifacts/src/github.com/fabcar/go"

@@ -2,7 +2,7 @@
 chmod -R 0755 ./crypto-config
 # Delete existing artifacts
 rm -rf ./crypto-config
-rm genesis.block channel1.tx
+rm genesis.block firstchannel.tx
 rm -rf ../../channel-artifacts/*
 
 #Generate Crypto artifactes for organizations
@@ -13,8 +13,8 @@ rm -rf ../../channel-artifacts/*
 # System channel
 SYS_CHANNEL="sys-channel"
 
-# channel name defaults to "channel1"
-CHANNEL_NAME="channel1"
+# channel name defaults to "firstchannel"
+CHANNEL_NAME="firstchannel"
 
 echo $CHANNEL_NAME
 
@@ -23,7 +23,7 @@ configtxgen -profile OrdererGenesis -configPath . -channelID $SYS_CHANNEL  -outp
 
 
 # Generate channel configuration block
-configtxgen -profile BasicChannel -configPath . -outputCreateChannelTx ./channel1.tx -channelID $CHANNEL_NAME
+configtxgen -profile BasicChannel -configPath . -outputCreateChannelTx ./firstchannel.tx -channelID $CHANNEL_NAME
 
 echo "#######    Generating anchor peer update for DiggipetMSP  ##########"
 configtxgen -profile BasicChannel -configPath . -outputAnchorPeersUpdate ./DiggipetMSPanchors.tx -channelID $CHANNEL_NAME -asOrg DiggipetMSP

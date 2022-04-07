@@ -12,7 +12,7 @@ setGlobalsForPeer0Diggipet(){
     export CORE_PEER_ADDRESS=localhost:7051
 }
 
-setGlobalsForPeer1DIGGIPET(){
+setGlobalsForPeer1Diggipet(){
     export CORE_PEER_LOCALMSPID="DiggipetMSP"
     export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_DIGGIPET_CA
     export CORE_PEER_MSPCONFIGPATH=${PWD}/crypto-config/peerOrganizations/diggipet.example.com/users/Admin@diggipet.example.com/msp
@@ -41,7 +41,7 @@ joinChannel(){
     
 }
 
-joinChannel
+#joinChannel
 
 updateAnchorPeers(){
     setGlobalsForPeer0Diggipet
@@ -50,7 +50,7 @@ updateAnchorPeers(){
     
 }
 
-# updateAnchorPeers
+updateAnchorPeers
 
 # removeOldCrypto
 

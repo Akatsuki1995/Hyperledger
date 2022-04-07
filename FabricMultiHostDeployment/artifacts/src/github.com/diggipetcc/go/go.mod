@@ -1,4 +1,4 @@
-module github.com/fabcar/go
+module github.com/diggipetcc/go
 
 go 1.13
 

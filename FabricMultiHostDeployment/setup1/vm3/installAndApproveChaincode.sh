@@ -1,94 +1,94 @@
 export CORE_PEER_TLS_ENABLED=true
-export ORDERER_CA=${PWD}/../vm4/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
-export PEER0_ORG3_CA=${PWD}/crypto-config/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/tls/ca.crt
+export ORDERER_CA=${PWD}/../vm4/crypto-config/ordererOrganizations/example.com/orderers/diggipet_orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
+export PEER0_BREEDERSORG_CA=${PWD}/crypto-config/peerOrganizations/breeders_org.example.com/peers/peer0.breeders_org.example.com/tls/ca.crt
 export FABRIC_CFG_PATH=${PWD}/../../artifacts/channel/config/
 
 
 export CHANNEL_NAME=firstchannel
 
-setGlobalsForPeer0Org3() {
-    export CORE_PEER_LOCALMSPID="Org3MSP"
-    export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG3_CA
-    export CORE_PEER_MSPCONFIGPATH=${PWD}/crypto-config/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp
+setGlobalsForPeer0Breedersorg() {
+    export CORE_PEER_LOCALMSPID="BreedersorgMSP"
+    export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_BREEDERSORG_CA
+    export CORE_PEER_MSPCONFIGPATH=${PWD}/crypto-config/peerOrganizations/breeders_org.example.com/users/Admin@breeders_org.example.com/msp
     export CORE_PEER_ADDRESS=localhost:11051
 
 }
 
-setGlobalsForPeer1Org3() {
-    export CORE_PEER_LOCALMSPID="Org3MSP"
-    export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG3_CA
-    export CORE_PEER_MSPCONFIGPATH=${PWD}/crypto-config/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp
+setGlobalsForPeer1Breedersorg() {
+    export CORE_PEER_LOCALMSPID="BreedersorgMSP"
+    export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_BREEDERSORG_CA
+    export CORE_PEER_MSPCONFIGPATH=${PWD}/crypto-config/peerOrganizations/breeders_org.example.com/users/Admin@breeders_org.example.com/msp
     export CORE_PEER_ADDRESS=localhost:12051
 
 }
 
 presetup() {
     echo Vendoring Go dependencies ...
-    pushd ./../../artifacts/src/github.com/fabcar/go
+    pushd ./../../artifacts/src/github.com/diggipetcc/go
     GO111MODULE=on go mod vendor
     popd
     echo Finished vendoring Go dependencies
 }
-# presetup
+#presetup
 
 CHANNEL_NAME="firstchannel"
 CC_RUNTIME_LANGUAGE="golang"
 VERSION="1"
-CC_SRC_PATH="./../../artifacts/src/github.com/fabcar/go"
-CC_NAME="fabcar"
+CC_SRC_PATH="./../../artifacts/src/github.com/diggipetcc/go"
+CC_NAME="diggipetcc"
 
 packageChaincode() {
     rm -rf ${CC_NAME}.tar.gz
-    setGlobalsForPeer0Org3
+    setGlobalsForPeer0Breedersorg
     peer lifecycle chaincode package ${CC_NAME}.tar.gz \
         --path ${CC_SRC_PATH} --lang ${CC_RUNTIME_LANGUAGE} \
         --label ${CC_NAME}_${VERSION}
-    echo "===================== Chaincode is packaged on peer0.org3 ===================== "
+    echo "===================== Chaincode is packaged on peer0.breeders_org ===================== "
 }
-# packageChaincode
+#packageChaincode
 
 installChaincode() {
-    setGlobalsForPeer0Org3
+    setGlobalsForPeer0Breedersorg
     peer lifecycle chaincode install ${CC_NAME}.tar.gz
-    echo "===================== Chaincode is installed on peer0.org3 ===================== "
+    echo "===================== Chaincode is installed on peer0.breeders_org ===================== "
 
 }
 
-# installChaincode
+#installChaincode
 
 queryInstalled() {
-    setGlobalsForPeer0Org3
+    setGlobalsForPeer0Breedersorg
     peer lifecycle chaincode queryinstalled >&log.txt
 
     cat log.txt
     PACKAGE_ID=$(sed -n "/${CC_NAME}_${VERSION}/{s/^Package ID: //; s/, Label:.*$//; p;}" log.txt)
     echo PackageID is ${PACKAGE_ID}
-    echo "===================== Query installed successful on peer0.org3 on channel ===================== "
+    echo "===================== Query installed successful on peer0.breeders_org on channel ===================== "
 }
 
-# queryInstalled
+#queryInstalled
 
-approveForMyOrg3() {
-    setGlobalsForPeer0Org3
+approveForBreedersOrg() {
+    setGlobalsForPeer0Breedersorg
 
-    peer lifecycle chaincode approveformyorg -o localhost:7050 \
-        --ordererTLSHostnameOverride orderer.example.com --tls $CORE_PEER_TLS_ENABLED \
+    peer lifecycle chaincode approveformyorg -o 34.125.59.32:7050 \
+        --ordererTLSHostnameOverride diggipet_orderer.example.com --tls $CORE_PEER_TLS_ENABLED \
         --cafile $ORDERER_CA --channelID $CHANNEL_NAME --name ${CC_NAME} \
         --version ${VERSION} --init-required --package-id ${PACKAGE_ID} \
         --sequence ${VERSION}
 
-    echo "===================== chaincode approved from org 3 ===================== "
+    echo "===================== chaincode approved from Breeders Org ===================== "
 }
-# queryInstalled
-# approveForMyOrg3
+#queryInstalled
+#approveForBreedersOrg
 
 checkCommitReadyness() {
 
-    setGlobalsForPeer0Org3
+    setGlobalsForPeer0Breedersorg
     peer lifecycle chaincode checkcommitreadiness --channelID $CHANNEL_NAME \
-        --peerAddresses localhost:11051 --tlsRootCertFiles $PEER0_ORG3_CA \
+        --peerAddresses localhost:11051 --tlsRootCertFiles $PEER0_BREEDERSORG_CA \
         --name ${CC_NAME} --version ${VERSION} --sequence ${VERSION} --output json --init-required
-    echo "===================== checking commit readyness from org 3 ===================== "
+    echo "===================== checking commit readyness from Breeders Org ===================== "
 }
 
-# checkCommitReadyness
+checkCommitReadyness

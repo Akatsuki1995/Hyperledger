@@ -9,7 +9,7 @@
 								"header": {
 									"creator": {
 										"id_bytes": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUNqekNDQWpXZ0F3SUJBZ0lVVDQwdGh6eHNaSDVZbFZhSVg4RUp1U1RmbURBd0NnWUlLb1pJemowRUF3SXcKY3pFTE1Ba0dBMVVFQmhNQ1ZWTXhFekFSQmdOVkJBZ1RDa05oYkdsbWIzSnVhV0V4RmpBVUJnTlZCQWNURFZOaApiaUJHY21GdVkybHpZMjh4R1RBWEJnTlZCQW9URUc5eVp6RXVaWGhoYlhCc1pTNWpiMjB4SERBYUJnTlZCQU1UCkUyTmhMbTl5WnpFdVpYaGhiWEJzWlM1amIyMHdIaGNOTWpBd056SXdNVGd6TURBd1doY05NakV3TnpJd01UZ3oKTlRBd1dqQkNNVEF3RFFZRFZRUUxFd1pqYkdsbGJuUXdDd1lEVlFRTEV3UnZjbWN4TUJJR0ExVUVDeE1MWkdWdwpZWEowYldWdWRERXhEakFNQmdOVkJBTVRCWEJoZG1GdU1Ga3dFd1lIS29aSXpqMENBUVlJS29aSXpqMERBUWNEClFnQUVGaGVBSXh3VjhhcTAzbllWU1BPYmhOSlpCeDdIV0NRdXRPQzNKdnM3SUl4dW9qK1JKUlZzTzZubmRObXoKTURtSGZ5QkNiTnlybU5uNGxMMDByV0xHbXFPQjF6Q0IxREFPQmdOVkhROEJBZjhFQkFNQ0I0QXdEQVlEVlIwVApBUUgvQkFJd0FEQWRCZ05WSFE0RUZnUVU4ZUttUFpvSkVnRlpUd2VzTVBqUHdzcXVQSTB3S3dZRFZSMGpCQ1F3CklvQWdMMmgvcDlHbXVwQW1iTFpMWDdSb3E0NWRQTGtqMWNLcitQVkZDTWQ1eDIwd2FBWUlLZ01FQlFZSENBRUUKWEhzaVlYUjBjbk1pT25zaWFHWXVRV1ptYVd4cFlYUnBiMjRpT2lKdmNtY3hMbVJsY0dGeWRHMWxiblF4SWl3aQphR1l1Ulc1eWIyeHNiV1Z1ZEVsRUlqb2ljR0YyWVc0aUxDSm9aaTVVZVhCbElqb2lZMnhwWlc1MEluMTlNQW9HCkNDcUdTTTQ5QkFNQ0EwZ0FNRVVDSVFDamJaOUh2WXpiTGMzcGJoeXBlV0tHa0RYWFF6QmJHdXFwdFRFRmEyWnEKU0FJZ1orK25MeWY5YVVWZUlZOTlHRG83cWxPMERoQno5dk9qcnUwbW9pY2FVRWc9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K",
-										"mspid": "Org1MSP"
+										"mspid": "DiggipetMSP"
 									},
 									"nonce": "oqGlTWERFmwtoxjZHr1x42bFYUXsVCjJ"
 								},
@@ -28,7 +28,7 @@
 										"proposal_response_payload": {
 											"extension": {
 												"chaincode_id": {
-													"name": "fabcar",
+													"name": "diggipetcc",
 													"path": "",
 													"version": "1"
 												},
@@ -49,7 +49,7 @@
 																"range_queries_info": [],
 																"reads": [
 																	{
-																		"key": "namespaces/fields/fabcar/Sequence",
+																		"key": "namespaces/fields/diggipetcc/Sequence",
 																		"version": {
 																			"block_num": "5",
 																			"tx_num": "0"
@@ -61,7 +61,7 @@
 														},
 														{
 															"collection_hashed_rwset": [],
-															"namespace": "fabcar",
+															"namespace": "diggipetcc",
 															"rwset": {
 																"metadata_writes": [],
 																"range_queries_info": [],
@@ -99,7 +99,7 @@
 										"input": {
 											"chaincode_spec": {
 												"chaincode_id": {
-													"name": "fabcar",
+													"name": "diggipetcc",
 													"path": "",
 													"version": ""
 												},
@@ -130,7 +130,7 @@
 							"epoch": "0",
 							"extension": {
 								"chaincode_id": {
-									"name": "fabcar",
+									"name": "diggipetcc",
 									"path": "",
 									"version": ""
 								}
@@ -144,7 +144,7 @@
 						"signature_header": {
 							"creator": {
 								"id_bytes": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUNqekNDQWpXZ0F3SUJBZ0lVVDQwdGh6eHNaSDVZbFZhSVg4RUp1U1RmbURBd0NnWUlLb1pJemowRUF3SXcKY3pFTE1Ba0dBMVVFQmhNQ1ZWTXhFekFSQmdOVkJBZ1RDa05oYkdsbWIzSnVhV0V4RmpBVUJnTlZCQWNURFZOaApiaUJHY21GdVkybHpZMjh4R1RBWEJnTlZCQW9URUc5eVp6RXVaWGhoYlhCc1pTNWpiMjB4SERBYUJnTlZCQU1UCkUyTmhMbTl5WnpFdVpYaGhiWEJzWlM1amIyMHdIaGNOTWpBd056SXdNVGd6TURBd1doY05NakV3TnpJd01UZ3oKTlRBd1dqQkNNVEF3RFFZRFZRUUxFd1pqYkdsbGJuUXdDd1lEVlFRTEV3UnZjbWN4TUJJR0ExVUVDeE1MWkdWdwpZWEowYldWdWRERXhEakFNQmdOVkJBTVRCWEJoZG1GdU1Ga3dFd1lIS29aSXpqMENBUVlJS29aSXpqMERBUWNEClFnQUVGaGVBSXh3VjhhcTAzbllWU1BPYmhOSlpCeDdIV0NRdXRPQzNKdnM3SUl4dW9qK1JKUlZzTzZubmRObXoKTURtSGZ5QkNiTnlybU5uNGxMMDByV0xHbXFPQjF6Q0IxREFPQmdOVkhROEJBZjhFQkFNQ0I0QXdEQVlEVlIwVApBUUgvQkFJd0FEQWRCZ05WSFE0RUZnUVU4ZUttUFpvSkVnRlpUd2VzTVBqUHdzcXVQSTB3S3dZRFZSMGpCQ1F3CklvQWdMMmgvcDlHbXVwQW1iTFpMWDdSb3E0NWRQTGtqMWNLcitQVkZDTWQ1eDIwd2FBWUlLZ01FQlFZSENBRUUKWEhzaVlYUjBjbk1pT25zaWFHWXVRV1ptYVd4cFlYUnBiMjRpT2lKdmNtY3hMbVJsY0dGeWRHMWxiblF4SWl3aQphR1l1Ulc1eWIyeHNiV1Z1ZEVsRUlqb2ljR0YyWVc0aUxDSm9aaTVVZVhCbElqb2lZMnhwWlc1MEluMTlNQW9HCkNDcUdTTTQ5QkFNQ0EwZ0FNRVVDSVFDamJaOUh2WXpiTGMzcGJoeXBlV0tHa0RYWFF6QmJHdXFwdFRFRmEyWnEKU0FJZ1orK25MeWY5YVVWZUlZOTlHRG83cWxPMERoQno5dk9qcnUwbW9pY2FVRWc9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K",
-								"mspid": "Org1MSP"
+								"mspid": "DiggipetMSP"
 							},
 							"nonce": "oqGlTWERFmwtoxjZHr1x42bFYUXsVCjJ"
 						}

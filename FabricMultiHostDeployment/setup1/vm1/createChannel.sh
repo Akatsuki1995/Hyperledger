@@ -24,7 +24,7 @@ createChannel(){
     setGlobalsForPeer0Diggipet
     
     # Replace localhost with your orderer's vm IP address
-    peer channel create -o 34.125.212.224:7050 -c $CHANNEL_NAME \
+    peer channel create -o 34.125.59.32:7050 -c $CHANNEL_NAME \
     --ordererTLSHostnameOverride diggipet_orderer.example.com \
     -f ./../../artifacts/channel/${CHANNEL_NAME}.tx --outputBlock ./channel-artifacts/${CHANNEL_NAME}.block \
     --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA
@@ -46,7 +46,7 @@ joinChannel(){
 updateAnchorPeers(){
     setGlobalsForPeer0Diggipet
     # Replace localhost with your orderer's vm IP address
-    peer channel update -o 34.125.212.224:7050 --ordererTLSHostnameOverride diggipet_orderer.example.com -c $CHANNEL_NAME -f ./../../artifacts/channel/${CORE_PEER_LOCALMSPID}anchors.tx --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA
+    peer channel update -o 34.125.59.32:7050 --ordererTLSHostnameOverride diggipet_orderer.example.com -c $CHANNEL_NAME -f ./../../artifacts/channel/${CORE_PEER_LOCALMSPID}anchors.tx --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA
     
 }
 

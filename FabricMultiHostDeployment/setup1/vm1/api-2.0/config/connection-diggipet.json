@@ -1,0 +1,62 @@
+{
+    "name": "first-network-diggipet",
+    "version": "1.0.0",
+    "client": {
+        "organization": "Diggipet",
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300"
+                }
+            }
+        }
+    },
+    "organizations": {
+        "Diggipet": {
+            "mspid": "DiggipetMSP",
+            "peers": [
+                "peer0.diggipet.example.com",
+                "peer1.diggipet.example.com"
+            ],
+            "certificateAuthorities": [
+                "ca.diggipet.example.com"
+            ]
+        }
+    },
+    "peers": {
+        "peer0.diggipet.example.com": {
+            "url": "grpcs://peer0.diggipet.example.com:7051",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICFjCCAb2gAwIBAgIUT/EqUb09rmHUoC6cAetcekdAwF0wCgYIKoZIzj0EAwIw\naDELMAkGA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQK\nEwtIeXBlcmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMt\nY2Etc2VydmVyMB4XDTIyMDQxMzAwMTEwMFoXDTM3MDQwOTAwMTEwMFowaDELMAkG\nA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQKEwtIeXBl\ncmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMtY2Etc2Vy\ndmVyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE/z0Oi/r385qezccLt/9QXHUE\ndwRPxRD+vK8fimxny31khzTOPvPA+UJwOSyicN+KYFTKkvTTigeX8/VehC6dLKNF\nMEMwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQEwHQYDVR0OBBYE\nFKNHLHdyb+Fxmk/4SrjjEpLiIwMpMAoGCCqGSM49BAMCA0cAMEQCIAPKclsL5Nyl\nVweBRJTAGKZ3dGVL18h8zZQxcwwlR3q4AiAE5c18Z/xLacNFj//KqQBjv7aPy7s8\n7MSH0uM826S1iw==\n-----END CERTIFICATE-----\n"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer0.diggipet.example.com",
+                "hostnameOverride": "peer0.diggipet.example.com"
+            }
+        },
+	"peer1.diggipet.example.com": {
+            "url": "grpcs://peer1.diggipet.example.com:8051",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICFjCCAb2gAwIBAgIUT/EqUb09rmHUoC6cAetcekdAwF0wCgYIKoZIzj0EAwIw\naDELMAkGA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQK\nEwtIeXBlcmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMt\nY2Etc2VydmVyMB4XDTIyMDQxMzAwMTEwMFoXDTM3MDQwOTAwMTEwMFowaDELMAkG\nA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQKEwtIeXBl\ncmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMtY2Etc2Vy\ndmVyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE/z0Oi/r385qezccLt/9QXHUE\ndwRPxRD+vK8fimxny31khzTOPvPA+UJwOSyicN+KYFTKkvTTigeX8/VehC6dLKNF\nMEMwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQEwHQYDVR0OBBYE\nFKNHLHdyb+Fxmk/4SrjjEpLiIwMpMAoGCCqGSM49BAMCA0cAMEQCIAPKclsL5Nyl\nVweBRJTAGKZ3dGVL18h8zZQxcwwlR3q4AiAE5c18Z/xLacNFj//KqQBjv7aPy7s8\n7MSH0uM826S1iw==\n-----END CERTIFICATE-----\n"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer1.diggipet.example.com",
+                "hostnameOverride": "peer1.diggipet.example.com"
+            }
+        }
+
+	
+    },
+    "certificateAuthorities": {
+        "ca.diggipet.example.com": {
+            "url": "https://ca.diggipet.example.com:7054",
+            "caName": "ca.diggipet.example.com",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICFjCCAb2gAwIBAgIUT/EqUb09rmHUoC6cAetcekdAwF0wCgYIKoZIzj0EAwIw\naDELMAkGA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQK\nEwtIeXBlcmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMt\nY2Etc2VydmVyMB4XDTIyMDQxMzAwMTEwMFoXDTM3MDQwOTAwMTEwMFowaDELMAkG\nA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQKEwtIeXBl\ncmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMtY2Etc2Vy\ndmVyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE/z0Oi/r385qezccLt/9QXHUE\ndwRPxRD+vK8fimxny31khzTOPvPA+UJwOSyicN+KYFTKkvTTigeX8/VehC6dLKNF\nMEMwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQEwHQYDVR0OBBYE\nFKNHLHdyb+Fxmk/4SrjjEpLiIwMpMAoGCCqGSM49BAMCA0cAMEQCIAPKclsL5Nyl\nVweBRJTAGKZ3dGVL18h8zZQxcwwlR3q4AiAE5c18Z/xLacNFj//KqQBjv7aPy7s8\n7MSH0uM826S1iw==\n-----END CERTIFICATE-----\n"
+            },
+            "httpOptions": {
+                "verify": false
+            }
+        }
+    }
+}

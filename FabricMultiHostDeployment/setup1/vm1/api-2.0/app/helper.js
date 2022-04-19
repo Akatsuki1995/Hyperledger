@@ -9,12 +9,11 @@ const util = require('util');
 
 const getCCP = async (org) => {
     let ccpPath;
-    if (org == "Org1") {
-        ccpPath = path.resolve(__dirname, '..', 'config', 'connection-org1.json');
+    if (org == "Diggipet") {
+        ccpPath = path.resolve(__dirname, '..', 'config', 'connection-diggipet.json');
 
-    } else if (org == "Org2") {
-        ccpPath = path.resolve(__dirname, '..', 'config', 'connection-org2.json');
-    } else
+    } 
+    else
         return null
     const ccpJSON = fs.readFileSync(ccpPath, 'utf8')
     const ccp = JSON.parse(ccpJSON);
@@ -23,12 +22,11 @@ const getCCP = async (org) => {
 
 const getCaUrl = async (org, ccp) => {
     let caURL;
-    if (org == "Org1") {
-        caURL = ccp.certificateAuthorities['ca.org1.example.com'].url;
+    if (org == "Diggipet") {
+        caURL = ccp.certificateAuthorities['ca.diggipet.example.com'].url;
 
-    } else if (org == "Org2") {
-        caURL = ccp.certificateAuthorities['ca.org2.example.com'].url;
-    } else
+    } 
+    else
         return null
     return caURL
 
@@ -36,12 +34,11 @@ const getCaUrl = async (org, ccp) => {
 
 const getWalletPath = async (org) => {
     let walletPath;
-    if (org == "Org1") {
-        walletPath = path.join(process.cwd(), 'org1-wallet');
+    if (org == "Diggipet") {
+        walletPath = path.join(process.cwd(), 'diggipet-wallet');
 
-    } else if (org == "Org2") {
-        walletPath = path.join(process.cwd(), 'org2-wallet');
-    } else
+    } 
+    else
         return null
     return walletPath
 
@@ -49,7 +46,7 @@ const getWalletPath = async (org) => {
 
 
 const getAffiliation = async (org) => {
-    return org == "Org1" ? 'org1.department1' : 'org2.department1'
+    return org == "Diggipet" ? 'diggipet.department1' : 'diggipet.department1'
 }
 
 const getRegisteredUser = async (username, userOrg, isJson) => {
@@ -88,7 +85,7 @@ const getRegisteredUser = async (username, userOrg, isJson) => {
     try {
         if (username == "superuser") {
             // Register the user, enroll the user, and import the new identity into the wallet.
-            secret = await ca.register({ affiliation: 'org1.department1', enrollmentID: username, role: 'client', attrs: [{ name: 'role', value: 'admin', ecert: true }] }, adminUser);
+            secret = await ca.register({ affiliation: 'diggipet.department1', enrollmentID: username, role: 'client', attrs: [{ name: 'role', value: 'admin', ecert: true }] }, adminUser);
 
         } else {
             secret = await ca.register({ affiliation: await getAffiliation(userOrg), enrollmentID: username, role: 'client' }, adminUser);
@@ -110,25 +107,16 @@ const getRegisteredUser = async (username, userOrg, isJson) => {
 
 
     let x509Identity;
-    if (userOrg == "Org1") {
+    if (userOrg == "Diggipet") {
         x509Identity = {
             credentials: {
                 certificate: enrollment.certificate,
                 privateKey: enrollment.key.toBytes(),
             },
-            mspId: 'Org1MSP',
+            mspId: 'DiggipetMSP',
             type: 'X.509',
         };
-    } else if (userOrg == "Org2") {
-        x509Identity = {
-            credentials: {
-                certificate: enrollment.certificate,
-                privateKey: enrollment.key.toBytes(),
-            },
-            mspId: 'Org2MSP',
-            type: 'X.509',
-        };
-    }
+    } 
 
     await wallet.put(username, x509Identity);
     console.log(`Successfully registered and enrolled admin user ${username} and imported it into the wallet`);
@@ -156,12 +144,11 @@ const isUserRegistered = async (username, userOrg) => {
 
 const getCaInfo = async (org, ccp) => {
     let caInfo
-    if (org == "Org1") {
-        caInfo = ccp.certificateAuthorities['ca.org1.example.com'];
+    if (org == "Diggipet") {
+        caInfo = ccp.certificateAuthorities['ca.diggipet.example.com'];
 
-    } else if (org == "Org2") {
-        caInfo = ccp.certificateAuthorities['ca.org2.example.com'];
-    } else
+    } 
+    else
         return null
     return caInfo
 
@@ -173,7 +160,7 @@ const enrollAdmin = async (org, ccp) => {
 
     try {
 
-        const caInfo = await getCaInfo(org, ccp) //ccp.certificateAuthorities['ca.org1.example.com'];
+        const caInfo = await getCaInfo(org, ccp) //ccp.certificateAuthorities['ca.diggipet.example.com'];
         const caTLSCACerts = caInfo.tlsCACerts.pem;
         const ca = new FabricCAServices(caInfo.url, { trustedRoots: caTLSCACerts, verify: false }, caInfo.caName);
 
@@ -192,25 +179,16 @@ const enrollAdmin = async (org, ccp) => {
         // Enroll the admin user, and import the new identity into the wallet.
         const enrollment = await ca.enroll({ enrollmentID: 'admin', enrollmentSecret: 'adminpw' });
         let x509Identity;
-        if (org == "Org1") {
+        if (org == "Diggipet") {
             x509Identity = {
                 credentials: {
                     certificate: enrollment.certificate,
                     privateKey: enrollment.key.toBytes(),
                 },
-                mspId: 'Org1MSP',
+                mspId: 'DiggipetMSP',
                 type: 'X.509',
             };
-        } else if (org == "Org2") {
-            x509Identity = {
-                credentials: {
-                    certificate: enrollment.certificate,
-                    privateKey: enrollment.key.toBytes(),
-                },
-                mspId: 'Org2MSP',
-                type: 'X.509',
-            };
-        }
+        } 
 
         await wallet.put('admin', x509Identity);
         console.log('Successfully enrolled admin user "admin" and imported it into the wallet');
@@ -256,7 +234,7 @@ const registerAndGerSecret = async (username, userOrg) => {
     try {
         // Register the user, enroll the user, and import the new identity into the wallet.
         secret = await ca.register({ affiliation: await getAffiliation(userOrg), enrollmentID: username, role: 'client' }, adminUser);
-        // const secret = await ca.register({ affiliation: 'org1.department1', enrollmentID: username, role: 'client', attrs: [{ name: 'role', value: 'approver', ecert: true }] }, adminUser);
+        // const secret = await ca.register({ affiliation: 'diggipet.department1', enrollmentID: username, role: 'client', attrs: [{ name: 'role', value: 'approver', ecert: true }] }, adminUser);
 
     } catch (error) {
         return error.message

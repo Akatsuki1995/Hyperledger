@@ -114,6 +114,7 @@ createcertificatesForDiggipet() {
 
   cp ${PWD}/../crypto-config/peerOrganizations/diggipet.example.com/msp/config.yaml ${PWD}/../crypto-config/peerOrganizations/diggipet.example.com/users/Admin@diggipet.example.com/msp/config.yaml
 
+
 }
 
 createcertificatesForDiggipet

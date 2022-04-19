@@ -16,6 +16,7 @@ services:
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
     volumes:
       - ./fabric-ca/vet_org:/etc/hyperledger/fabric-ca-server
+
     container_name: ca.vet_org.example.com
     hostname: ca.vet_org.example.com
     networks:

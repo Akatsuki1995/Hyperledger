@@ -21,7 +21,7 @@ const invokeTransaction = async (channelName, chaincodeName, fcn, args, username
         logger.debug(util.format('\n============ invoke transaction on channel %s ============\n', channelName));
 
         // load the network configuration
-        // const ccpPath =path.resolve(__dirname, '..', 'config', 'connection-org1.json');
+        // const ccpPath =path.resolve(__dirname, '..', 'config', 'connection-diggipet.json');
         // const ccpJSON = fs.readFileSync(ccpPath, 'utf8')
         const ccp = await helper.getCCP(org_name) //JSON.parse(ccpJSON);
 
@@ -72,8 +72,8 @@ const invokeTransaction = async (channelName, chaincodeName, fcn, args, username
         //         message = `Successfully added the Invoice Data`
         //         break;
         //     case "UpdateInvoice":
-        //         if (org_name == "Org1") {
-        //             return { message: "Only Organization 2 is allowed to add transactions" }
+        //         if (org_name == "Diggipet") {
+        //             return { message: "Only Vet Organization is allowed to add transactions" }
         //         } else {
         //             result = await contract.submitTransaction(fcn, args[0], args[1], args[2]);
         //             // obj = JSON.stringify(JSON.parse(args[0]))
@@ -91,28 +91,28 @@ const invokeTransaction = async (channelName, chaincodeName, fcn, args, username
         // }
         let result
         let message;
-        if (fcn === "createCar" || fcn === "createPrivateCarImplicitForOrg1"
-            || fcn == "createPrivateCarImplicitForOrg2") {
+        if (fcn === "createPet" || fcn === "createPrivatePetImplicitForDiggipet"
+            || fcn == "createPrivatePetImplicitForVetOrg") {
             result = await contract.submitTransaction(fcn, args[0], args[1], args[2], args[3], args[4]);
-            message = `Successfully added the car asset with key ${args[0]}`
+            message = `Successfully added the pet asset with key ${args[0]}`
 
-        } else if (fcn === "changeCarOwner") {
+        } else if (fcn === "changePetOwner") {
             result = await contract.submitTransaction(fcn, args[0], args[1]);
-            message = `Successfully changed car owner with key ${args[0]}`
-        } else if (fcn == "createPrivateCar" || fcn == "updatePrivateData") {
+            message = `Successfully changed pet owner with key ${args[0]}`
+        } else if (fcn == "createPrivatePet" || fcn == "updatePrivateData") {
             console.log(`Transient data is : ${transientData}`)
-            let carData = JSON.parse(transientData)
-            console.log(`car data is : ${JSON.stringify(carData)}`)
-            let key = Object.keys(carData)[0]
+            let petData = JSON.parse(transientData)
+            console.log(`Pet data is : ${JSON.stringify(petData)}`)
+            let key = Object.keys(petData)[0]
             const transientDataBuffer = {}
-            transientDataBuffer[key] = Buffer.from(JSON.stringify(carData.car))
+            transientDataBuffer[key] = Buffer.from(JSON.stringify(petData.pet))
             result = await contract.createTransaction(fcn)
                 .setTransient(transientDataBuffer)
                 .submit()
             message = `Successfully submitted transient data`
         }
         else {
-            return `Invocation require either createCar or changeCarOwner as function but got ${fcn}`
+            return `Invocation require either createPet or changePetOwner as function but got ${fcn}`
         }
         await gateway.disconnect();
 

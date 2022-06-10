@@ -21,10 +21,10 @@ const invokeTransaction = async (channelName, chaincodeName, fcn, args, username
         logger.debug(util.format('\n============ invoke transaction on channel %s ============\n', channelName));
 
         // load the network configuration
-        // const ccpPath =path.resolve(__dirname, '..', 'config', 'connection-diggipet.json');
-        // const ccpJSON = fs.readFileSync(ccpPath, 'utf8')
-        const ccp = await helper.getCCP(org_name) //JSON.parse(ccpJSON);
-
+        //const ccpPath =path.resolve(__dirname, '..', 'config', 'connection-diggipet.json');
+        //const ccpJSON = fs.readFileSync(ccpPath, 'utf8')
+        //const ccp = JSON.parse(ccpJSON);
+        const ccp = await helper.getCCP(org_name)
         // Create a new file system based wallet for managing identities.
         const walletPath = await helper.getWalletPath(org_name) //path.join(process.cwd(), 'wallet');
         const wallet = await Wallets.newFileSystemWallet(walletPath);
@@ -43,7 +43,11 @@ const invokeTransaction = async (channelName, chaincodeName, fcn, args, username
 
 
         const connectOptions = {
-            wallet, identity: username, discovery: { enabled: true, asLocalhost: false },
+            wallet,
+            identity: username,
+            discovery: { 
+                enabled: true,
+                asLocalhost: false },
             eventHandlerOptions: {
                 commitTimeout: 100,
                 strategy: DefaultEventHandlerStrategies.NETWORK_SCOPE_ALLFORTX
@@ -101,8 +105,8 @@ const invokeTransaction = async (channelName, chaincodeName, fcn, args, username
             message = `Successfully changed pet owner with key ${args[0]}`
         } else if (fcn == "createPrivatePet" || fcn == "updatePrivateData") {
             console.log(`Transient data is : ${transientData}`)
-            let petData = JSON.parse(transientData)
-            console.log(`Pet data is : ${JSON.stringify(petData)}`)
+            let petData = transientData
+            //console.log(`Pet data is : ${JSON.stringify(petData)}`)
             let key = Object.keys(petData)[0]
             const transientDataBuffer = {}
             transientDataBuffer[key] = Buffer.from(JSON.stringify(petData.pet))

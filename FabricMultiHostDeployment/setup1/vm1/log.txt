@@ -1,0 +1,2 @@
+Installed chaincodes on peer:
+Package ID: cc_diggipet_1:1bd4634bec29daa9bcb8843225aa67db6e131f6b1291f087b290926cf4a2cf51, Label: cc_diggipet_1

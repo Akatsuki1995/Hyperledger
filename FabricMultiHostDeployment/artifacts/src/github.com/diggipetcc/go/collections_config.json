@@ -1,0 +1,24 @@
+[
+    {
+    "name": "collectionPets",
+    "policy": "OR('DiggipetMSP.member', 'VetorgMSP.member','BreedersorgMSP.member')",
+    "requiredPeerCount": 1,
+    "maxPeerCount": 1,
+    "blockToLive":1000000,
+    "memberOnlyRead": true,
+    "memberOnlyWrite": true
+    },
+    {
+    "name": "collectionPetPrivateDetails",
+    "policy": "OR('DiggipetMSP.member')",
+    "requiredPeerCount": 0,
+    "maxPeerCount": 1,
+    "blockToLive":3,
+    "memberOnlyRead": true,
+    "memberOnlyWrite": false,
+    "endorsementPolicy": {
+        "signaturePolicy": "OR('DiggipetMSP.member')"
+    }
+    }
+
+ ]

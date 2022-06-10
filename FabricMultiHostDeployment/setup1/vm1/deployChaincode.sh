@@ -36,7 +36,7 @@ CHANNEL_NAME="firstchannel"
 CC_RUNTIME_LANGUAGE="golang"
 VERSION="1"
 CC_SRC_PATH="./../../artifacts/src/github.com/diggipetcc/go"
-CC_NAME="diggipetcc"
+CC_NAME="cc_diggipet"
 
 packageChaincode() {
     rm -rf ${CC_NAME}.tar.gz
@@ -75,8 +75,10 @@ approveForDiggipet() {
     peer lifecycle chaincode approveformyorg -o 34.125.59.32:7050 \
         --ordererTLSHostnameOverride diggipet_orderer.example.com --tls \
         --cafile $ORDERER_CA --channelID $CHANNEL_NAME --name ${CC_NAME} --version ${VERSION} \
+        --collections-config ./../../artifacts/src/github.com/diggipetcc/go/collections_config.json \
+        --signature-policy "OR('DiggipetMSP.member','VetOrgMSP.member','BreedersorgMSP.member')" \
         --init-required --package-id ${PACKAGE_ID} \
-        --sequence ${VERSION}
+        --sequence 2
     # set +x
 
     echo "===================== chaincode approved from DiggipetOrg ===================== "
@@ -90,7 +92,9 @@ checkCommitReadyness() {
     setGlobalsForPeer0Diggipet
     peer lifecycle chaincode checkcommitreadiness \
         --channelID $CHANNEL_NAME --name ${CC_NAME} --version ${VERSION} \
-        --sequence ${VERSION} --output json --init-required
+        --collections-config /home/ubuntu/Hyperledger/FabricMultiHostDeployment/artifacts/src/github.com/diggipetcc/go/collections_config.json \
+        --signature-policy "OR('DiggipetMSP.member','VetOrgMSP.member','BreedersorgMSP.member')" \
+        --sequence 2 --output json --init-required
     echo "===================== checking commit readyness from DiggipetOrg ===================== "
 }
 
@@ -115,7 +119,7 @@ queryCommitted() {
 
 }
 
-queryCommitted
+#queryCommitted
 
 chaincodeInvokeInit() {
     setGlobalsForPeer0Diggipet

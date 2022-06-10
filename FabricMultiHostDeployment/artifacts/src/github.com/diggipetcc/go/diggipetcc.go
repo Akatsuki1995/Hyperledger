@@ -278,7 +278,14 @@ func (s *SmartContract) createPrivatePet(APIstub shim.ChaincodeStubInterface, ar
 	}
 
 	logger.Infof("55555")
-
+	if err != nil {
+        return shim.Error("Cannot get ID" + err.Error())
+    }
+	mspid, err := cid.GetMSPID(APIstub)
+	err = verifyClientOrgMatchesPeerOrg(mspid)
+    if err != nil {
+        return shim.Error(err.Error())
+    }
 	var pet = Pet{Name: petInput.Name, Species: petInput.Species, Breed: petInput.Breed, Owner: petInput.Owner}
 
 	petAsBytes, err = json.Marshal(pet)
@@ -342,7 +349,14 @@ func (s *SmartContract) updatePrivateData(APIstub shim.ChaincodeStubInterface, a
 	}
 
 	logger.Infof("2222222")
-
+	if err != nil {
+        return shim.Error(err.Error())
+    }
+	mspid, err := cid.GetMSPID(APIstub)
+	err = verifyClientOrgMatchesPeerOrg(mspid)
+    if err != nil {
+        return shim.Error(err.Error())
+    }
 	var petInput petTransientInput
 	err = json.Unmarshal(petDataAsBytes, &petInput)
 	if err != nil {
@@ -366,7 +380,21 @@ func (s *SmartContract) updatePrivateData(APIstub shim.ChaincodeStubInterface, a
 	return shim.Success(petPrivateDetailsAsBytes)
 
 }
+func verifyClientOrgMatchesPeerOrg(clientOrgID string) error {
+	peerOrgID, err := shim.GetMSPID()
+	if err != nil {
+		return fmt.Errorf("failed getting peer's orgID: %v", err)
+	}
 
+	if clientOrgID != peerOrgID {
+		return fmt.Errorf("client from org %s is not authorized to read or write private data from an org %s peer",
+			clientOrgID,
+			peerOrgID,
+		)
+	}
+
+	return nil
+}
 func (s *SmartContract) createPet(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
 
 	if len(args) != 5 {
@@ -510,7 +538,7 @@ func (s *SmartContract) restictedMethod(APIstub shim.ChaincodeStubInterface, arg
 		shim.Error("Client identity does not posses the attribute")
 	}
 	// Do something with the value of 'val'
-	if val != "ADMIN" {
+	if val != "admin" {
 		fmt.Println("Attribute role: " + val)
 		return shim.Error("Only user with role as ADMIN have access this method!")
 	} else {
@@ -615,7 +643,7 @@ func (s *SmartContract) createPrivatePetImplicitForDiggipet(APIstub shim.Chainco
 	petAsBytes, _ := json.Marshal(pet)
 	// APIstub.PutState(args[0], petAsBytes)
 
-	err := APIstub.PutPrivateData("_implicit_org_Diggipet", args[0], petAsBytes)
+	err := APIstub.PutPrivateData("_implicit_org_DiggipetMSP", args[0], petAsBytes)
 	if err != nil {
 		return shim.Error("Failed to add asset: " + args[0])
 	}

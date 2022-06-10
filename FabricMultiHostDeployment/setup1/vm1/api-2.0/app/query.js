@@ -48,7 +48,7 @@ const query = async (channelName, chaincodeName, args, fcn, username, org_name) 
         if (fcn == "queryPet" || fcn =="queryPetsByOwner" || fcn == 'getHistoryForAsset' || fcn=='restictedMethod') {
             console.log(`arguments type is------------------------------------------------------------- ${typeof args}`)
             console.log(`length of args is------------------------------------------------------------ ${args.length}`)
-            result = await contract.evaluateTransaction(fcn, args[0]);
+            result = await contract.evaluateTransaction(fcn, args);
 
         } else if (fcn == "readPrivatePet" || fcn == "queryPrivateDataHash"
         || fcn == "collectionPetPrivateDetails") {

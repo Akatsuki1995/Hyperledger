@@ -37,7 +37,7 @@
 #############################################################################
 
 # Version of config file
-version: 1.4.7
+version: 1.4.9
 
 # Server's listening port (default: 7054)
 port: 7054
@@ -243,12 +243,12 @@ ldap:
 # which are always stored in lower case.
 #############################################################################
 affiliations:
-   diggipet:
+   org1:
       - department1
       - department2
-      - department3
-   vet_org:
+   org2:
       - department1
+
 #############################################################################
 #  Signing section
 #
@@ -318,7 +318,7 @@ csr:
         O: Hyperledger
         OU: Fabric
    hosts:
-     - b966e34edf08
+     - 3f53c219c6d9
      - localhost
    ca:
       expiry: 131400h
